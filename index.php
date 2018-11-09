@@ -4,7 +4,7 @@
 	<title>Friend list</title>
 </head>
 <body>
-	<form method="post" action="task3.php" >
+	<form method="post" action="index.php" >
 	 Name:<input type="text" name="name">
 	<input type="submit">
 	</form>
