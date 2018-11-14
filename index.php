@@ -52,13 +52,24 @@ li{
 	$file = fopen( $filename, "r" );
 	while (!feof($file)) {
 	    $ligne=fgets($file);
-	    if(isset($_POST['filter']) and $_POST['filter']!=''){
+	    if(isset($_POST['filter']) and $_POST['filter']!='' and !isset($_POST['startingWith']) ){
 	    	$ligne=strstr($ligne, $_POST['filter'],true).strstr($ligne, $_POST['filter']);
-	    	if($ligne)echo "<ul><li>$ligne</ul></li><br>";
+	    	if($ligne)echo "<ul><li>$ligne</ul></li>";
 	    }
+	    elseif(isset($_POST['filter']) and $_POST['filter']!='' and isset($_POST['startingWith']) ){
+	    	if((strpos($ligne, $_POST['filter'])!=1)){
+	    		
+	    		$ligne=strstr($ligne, $_POST['filter']);
+	    	}
+	    	else{
+	    		$ligne=NULL;
+	    	}
+	    	if($ligne)echo "<ul><li>$ligne</ul></li>";
+	    	}
 	    else{
-	    	if($ligne)echo "<ul><li>$ligne</ul></li><br>";
-	    }
+	   			if($ligne)echo "<ul><li>$ligne</ul></li>";
+	   		}
+
 	    
 	}
 	
@@ -67,7 +78,9 @@ li{
 	<form method="post" action="index.php" >
 	<input type="text" name="filter">
 	<input type="submit" value="Filter list">
+	<input type="checkbox" name="startingWith" >Only names starting with</input>
 	</form>
+	
 <br>
 <footer>
  <h2>footer</h2>
