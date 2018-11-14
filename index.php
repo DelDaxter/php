@@ -53,7 +53,7 @@ li{
 	while (!feof($file)) {
 	    $ligne=fgets($file);
 	    if(isset($_POST['filter']) and $_POST['filter']!=''){
-	    	$ligne=strstr($ligne, $_POST['filter']);
+	    	$ligne=strstr($ligne, $_POST['filter'],true).strstr($ligne, $_POST['filter']);
 	    	if($ligne)echo "<ul><li>$ligne</ul></li><br>";
 	    }
 	    else{
